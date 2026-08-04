@@ -1,2 +1,2 @@
-# semora.github.io
+# semora01.github.io
 Gələcəyinizi birlikdə formalaşdıraq 
