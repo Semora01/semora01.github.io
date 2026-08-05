@@ -213,3 +213,61 @@ body{
     color: #64748b;
     line-height: 1.6;
 }
+.team {
+    padding: 80px 0;
+    background: white;
+}
+
+.team h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.team-cards {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.team-card {
+    background: #f8fafc;
+    width: 280px;
+    padding: 30px 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+}
+
+.team-image {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #e8f1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-image i {
+    font-size: 45px;
+    color: #2563eb;
+}
+
+.team-card h3 {
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.team-card p {
+    color: #64748b;
+}
