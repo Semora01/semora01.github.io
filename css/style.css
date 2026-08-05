@@ -142,3 +142,26 @@ body{
     color: #64748b;
     line-height: 1.6;
 }
+.about {
+    padding: 80px 0;
+    background: white;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 36px;
+    color: #1e293b;
+    margin-bottom: 25px;
+}
+
+.about p {
+    font-size: 18px;
+    color: #64748b;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
