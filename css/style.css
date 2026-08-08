@@ -322,3 +322,22 @@ body{
     color: #1e293b;
     font-size: 17px;
 }
+.reviews-toggle {
+    display: block;
+    margin: 30px auto;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 30px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.review-cards {
+    display: none;
+}
+
+.review-cards.show {
+    display: flex;
+}
