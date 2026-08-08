@@ -562,6 +562,543 @@ function toggleReviews() {
 
 }
     </script>
+    <style>
+/* Qəbul formu */
+.appointment-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.appointment-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.appointment-form {
+    width: 100%;
+    max-width: 520px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+}
+
+.appointment-close {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.appointment-form h2 {
+    text-align: center;
+    color: #1e293b;
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.appointment-form .form-subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #334155;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.required {
+    color: #ef4444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1.5px solid #dbe3ec;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+}
+
+.form-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.input-error {
+    border-color: #ef4444 !important;
+    background: #fff5f5 !important;
+}
+
+.error-message {
+    display: none;
+    color: #ef4444;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.send-appointment {
+    width: 100%;
+    border: none;
+    border-radius: 13px;
+    padding: 15px;
+    margin-top: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.send-appointment:disabled {
+    background: #cbd5e1;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.send-appointment:not(:disabled):hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.form-note {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+    .appointment-overlay {
+        padding: 12px;
+    }
+
+    .appointment-form {
+        padding: 25px 18px;
+        border-radius: 20px;
+    }
+
+    .appointment-form h2 {
+        font-size: 24px;
+    }
+}
+</style>
+
+
+<!-- QƏBULA YAZIL FORMU -->
+
+<div class="appointment-overlay" id="appointmentOverlay">
+
+    <div class="appointment-form">
+
+        <button class="appointment-close"
+                type="button"
+                onclick="closeAppointmentForm()">
+            ×
+        </button>
+
+        <h2>Qəbula yazıl</h2>
+
+        <p class="form-subtitle">
+            Məlumatlarınızı daxil edin, sizinlə əlaqə saxlayaq.
+        </p>
+
+
+        <div class="form-group">
+
+            <label>
+                Ad <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="appointmentName"
+                placeholder="Adınızı yazın"
+                oninput="checkAppointmentForm()">
+
+            <div class="error-message" id="nameError">
+                ⚠️ Adınızı yazın
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Soyad <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="appointmentSurname"
+                placeholder="Soyadınızı yazın"
+                oninput="checkAppointmentForm()">
+
+            <div class="error-message" id="surnameError">
+                ⚠️ Soyadınızı yazın
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Yaş <span class="required">*</span>
+            </label>
+
+            <input
+                type="number"
+                id="appointmentAge"
+                placeholder="Yaş"
+                min="1"
+                max="120"
+                oninput="checkAppointmentForm()">
+
+            <div class="error-message" id="ageError">
+                ⚠️ Yaşınızı yazın
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Cins <span class="required">*</span>
+            </label>
+
+            <select id="appointmentGender"
+                    onchange="checkAppointmentForm()">
+
+                <option value="">Cins seçin</option>
+                <option value="Qadın">Qadın</option>
+                <option value="Kişi">Kişi</option>
+
+            </select>
+
+            <div class="error-message" id="genderError">
+                ⚠️ Cins seçin
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Müraciət səbəbi
+            </label>
+
+            <textarea
+                id="appointmentReason"
+                placeholder="Qısa məlumat yaza bilərsiniz..."></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Əlaqə nömrəsi <span class="required">*</span>
+            </label>
+
+            <input
+                type="tel"
+                id="appointmentPhone"
+                placeholder="+994 XX XXX XX XX"
+                oninput="checkAppointmentForm()">
+
+            <div class="error-message" id="phoneError">
+                ⚠️ Əlaqə nömrəsini yazın
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="send-appointment"
+            id="sendAppointment"
+            disabled
+            onclick="sendAppointment()">
+
+            Göndər
+
+        </button>
+
+        <p class="form-note">
+            * İşarəsi olan xanaların doldurulması mütləqdir.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openAppointmentForm() {
+
+    const overlay = document.getElementById("appointmentOverlay");
+
+    overlay.classList.add("active");
+
+}
+
+
+function closeAppointmentForm() {
+
+    const overlay = document.getElementById("appointmentOverlay");
+
+    overlay.classList.remove("active");
+
+}
+
+
+/* Qəbula yazıl düyməsini tapırıq */
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const appointmentButtons =
+        document.querySelectorAll('a[href="#contact"]');
+
+    appointmentButtons.forEach(function(button) {
+
+        button.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            openAppointmentForm();
+
+        });
+
+    });
+
+});
+
+
+/* Məcburi xanaları yoxlayırıq */
+
+function checkAppointmentForm() {
+
+    const name =
+        document.getElementById("appointmentName").value.trim();
+
+    const surname =
+        document.getElementById("appointmentSurname").value.trim();
+
+    const age =
+        document.getElementById("appointmentAge").value.trim();
+
+    const gender =
+        document.getElementById("appointmentGender").value;
+
+    const phone =
+        document.getElementById("appointmentPhone").value.trim();
+
+
+    const sendButton =
+        document.getElementById("sendAppointment");
+
+
+    sendButton.disabled =
+        !(name && surname && age && gender && phone);
+
+}
+
+
+/* Göndər düyməsi */
+
+function sendAppointment() {
+
+    const name =
+        document.getElementById("appointmentName");
+
+    const surname =
+        document.getElementById("appointmentSurname");
+
+    const age =
+        document.getElementById("appointmentAge");
+
+    const gender =
+        document.getElementById("appointmentGender");
+
+    const reason =
+        document.getElementById("appointmentReason");
+
+    const phone =
+        document.getElementById("appointmentPhone");
+
+
+    let valid = true;
+
+
+    /* Əvvəlki xətaları təmizləyirik */
+
+    document.querySelectorAll(".input-error")
+        .forEach(function(element) {
+
+            element.classList.remove("input-error");
+
+        });
+
+
+    document.querySelectorAll(".error-message")
+        .forEach(function(element) {
+
+            element.classList.remove("show");
+
+        });
+
+
+    /* Ad */
+
+    if (!name.value.trim()) {
+
+        name.classList.add("input-error");
+
+        document.getElementById("nameError")
+            .classList.add("show");
+
+        valid = false;
+
+    }
+
+
+    /* Soyad */
+
+    if (!surname.value.trim()) {
+
+        surname.classList.add("input-error");
+
+        document.getElementById("surnameError")
+            .classList.add("show");
+
+        valid = false;
+
+    }
+
+
+    /* Yaş */
+
+    if (!age.value.trim()) {
+
+        age.classList.add("input-error");
+
+        document.getElementById("ageError")
+            .classList.add("show");
+
+        valid = false;
+
+    }
+
+
+    /* Cins */
+
+    if (!gender.value) {
+
+        gender.classList.add("input-error");
+
+        document.getElementById("genderError")
+            .classList.add("show");
+
+        valid = false;
+
+    }
+
+
+    /* Telefon */
+
+    if (!phone.value.trim()) {
+
+        phone.classList.add("input-error");
+
+        document.getElementById("phoneError")
+            .classList.add("show");
+
+        valid = false;
+
+    }
+
+
+    if (!valid) {
+
+        return;
+
+    }
+
+
+    /* WhatsApp mesajı */
+
+    const message =
+`📋 YENİ QƏBUL MÜRACİƏTİ
+
+👤 Ad: ${name.value.trim()}
+👤 Soyad: ${surname.value.trim()}
+🎂 Yaş: ${age.value.trim()}
+⚧ Cins: ${gender.value}
+📝 Müraciət səbəbi: ${reason.value.trim() || "Qeyd edilməyib"}
+📞 Əlaqə nömrəsi: ${phone.value.trim()}`;
+
+
+    const whatsappNumber = "994506672780";
+
+    const whatsappURL =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(whatsappURL, "_blank");
+
+}
+
+</script>
 </body>
 
 </html>
