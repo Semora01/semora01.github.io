@@ -472,6 +472,22 @@ href="css/style.css">
     </div>
 
     </section>
+    <script>
+function toggleReviews() {
+
+    const reviews = document.querySelector('.review-cards');
+    const button = document.querySelector('.reviews-toggle');
+
+    reviews.classList.toggle('show');
+
+    if (reviews.classList.contains('show')) {
+        button.innerHTML = 'Rəyləri bağla <i class="fa-solid fa-chevron-up"></i>';
+    } else {
+        button.innerHTML = 'Rəylər <i class="fa-solid fa-chevron-down"></i>';
+    }
+
+}
+    </script>
 </body>
 
 </html>
