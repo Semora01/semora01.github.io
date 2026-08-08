@@ -396,3 +396,64 @@ body{
 .contact-card a:hover {
     color: #2563eb;
 }
+.contact {
+    padding: 80px 0;
+    background: white;
+}
+
+.contact h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.contact .section-text {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 40px;
+}
+
+.contact-cards {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.contact-card {
+    background: #f8fafc;
+    width: 240px;
+    padding: 30px 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+}
+
+.contact-card i {
+    font-size: 40px;
+    color: #2563eb;
+    margin-bottom: 18px;
+}
+
+.contact-card h3 {
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.contact-card p,
+.contact-card a {
+    color: #64748b;
+    line-height: 1.6;
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    color: #2563eb;
+}
