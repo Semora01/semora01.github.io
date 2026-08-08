@@ -463,7 +463,146 @@ body{
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
 }
+/* =========================
+   SEMORA FOOTER
+   ========================= */
 
+.site-footer {
+    background: #1e293b;
+    color: #ffffff;
+    padding: 60px 0 0;
+    margin-top: 50px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 45px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.footer-column h3 {
+    margin: 0 0 18px;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.footer-column p {
+    margin: 0;
+    color: #cbd5e1;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.footer-column a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-bottom: 12px;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #ffffff;
+}
+
+.footer-column i {
+    margin-right: 7px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-social a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+
+    font-size: 20px;
+}
+
+.footer-social a i {
+    margin: 0;
+}
+
+.footer-hours {
+    margin-top: 18px !important;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+/* =========================
+   PLANŞET
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 35px;
+    }
+
+}
+
+
+/* =========================
+   MOBİL
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .site-footer {
+        padding-top: 45px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .footer-column a {
+        margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+        padding: 18px 15px;
+    }
+
+    .footer-bottom p {
+        line-height: 1.6;
+    }
+
+}
 .contact-map iframe {
     display: block;
     width: 100%;
